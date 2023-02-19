@@ -1,0 +1,55 @@
+CREATE TYPE status AS ENUM ('active', 'blocked', 'canceled');
+
+create table bank.bank_account
+(
+    account_number BIGSERIAL
+        constraint bank_account_pk
+            primary key CHECK ( account_number BETWEEN 1000000000000000 AND 9999999999999999 ),
+    pin_code        int         not null CHECK ( pin_code BETWEEN 1000 AND 9999 ),
+    cvv             int         not null CHECK ( cvv BETWEEN 100 AND 999 ),
+    balance         int         not null,
+    date_start      date        not null ,
+    date_end        date        not null ,
+    status          status      not null
+);
+
+create table bank.credit_card
+(
+    credit_card_number BIGSERIAL
+        constraint credit_card_pk
+            primary key CHECK ( credit_card_number BETWEEN 1000000000000000 AND 9999999999999999 ),
+    pin_code            int     not null CHECK ( pin_code BETWEEN 1000 AND 9999 ),
+    cvv                 int     not null CHECK ( cvv BETWEEN 100 AND 999 ),
+    credit_balance      int,
+    amount_balance      int     not null,
+    current_balance     int     not null,
+    minimum_payment     int,
+    monthly_payment     int,
+    date_start          date    not null,
+    date_end            date    not null,
+    status              status  not null
+);
+
+create table bank.client
+(
+    id serial constraint client_pk primary key,
+    name                varchar(10) not null,
+    surname             varchar(10) not null,
+    bank_account_number bigint references bank.bank_account (account_number),
+    credit_card_number  bigint references bank.credit_card (credit_card_number)
+);
+
+create table bank.admin
+(
+    id                  serial constraint admin_pk primary key,
+    name                varchar(10) not null,
+    surname             varchar(10) not null
+);
+
+create table bank.credit_cards
+(
+    id                  serial constraint credit_cards_pk primary key,
+    max_percent         int not null,
+    credit_card_number  bigint references bank.credit_card (credit_card_number),
+    admin               int references bank.admin (id)
+);
