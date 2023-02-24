@@ -1,5 +1,10 @@
 package com.cpallas.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public enum Status {
 
     ACTIVE("active"),
@@ -7,12 +12,4 @@ public enum Status {
     CANCELED("canceled");
 
     private final String status;
-
-    Status(String status) {
-        this.status = status;
-    }
-
-    public String getCode() {
-        return status;
-    }
 }
