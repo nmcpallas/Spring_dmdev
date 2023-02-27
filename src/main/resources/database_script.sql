@@ -8,7 +8,7 @@ create table user_info
 create table role
 (
     id      SERIAL      PRIMARY KEY ,
-    role    VARCHAR(10) NOT NULL
+    role    VARCHAR(10) UNIQUE
 );
 
 create table permission
@@ -16,8 +16,8 @@ create table permission
     id          SERIAL      PRIMARY KEY ,
     login       VARCHAR(10) NOT NULL ,
     password    VARCHAR(10) NOT NULL ,
-    user_id     INT         REFERENCES user_info (id) ,
-    role_id     INT         REFERENCES role (id)
+    user_id     INT         NOT NULL    UNIQUE  REFERENCES user_info (id) ,
+    role_id     INT         NOT NULL    REFERENCES role (id)
 );
 
 create table bank_account
@@ -27,8 +27,7 @@ create table bank_account
     balance         INT         NOT NULL ,
     start_date      DATE        NOT NULL ,
     end_date        DATE        NOT NULL ,
-    status          varchar(10) NOT NULL ,
-    user_id         INT         REFERENCES user_info (id)
+    user_id         INT         NOT NULL    UNIQUE  REFERENCES user_info (id)
 );
 
 create table credit_card
@@ -45,5 +44,5 @@ create table credit_card
     start_date          DATE        NOT NULL ,
     end_date            DATE        NOT NULL ,
     status              VARCHAR(10) NOT NULL ,
-    user_id             INT         REFERENCES user_info (id)
+    bank_account_id     INT         NOT NULL    REFERENCES bank_account (id)
 );
