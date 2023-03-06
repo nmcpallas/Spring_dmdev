@@ -1,25 +1,17 @@
 package com.cpallas.entities.crud;
 
 import com.cpallas.entities.Role;
-import com.cpallas.util.HibernateUtil;
-import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
-public class RoleTest {
+public class RoleIT extends BaseTest {
 
     @Test
     void createAndRead() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         Role admin = Role.builder()
                 .role("admin")
                 .build();
@@ -28,20 +20,14 @@ public class RoleTest {
         session.flush();
         session.clear();
 
-        Role role = session.get(Role.class, 1);
+        Role role = session.get(Role.class, admin.getId());
 
         assertEquals(admin, role);
         assertEquals(admin.getRole(), role.getRole());
-
-        session.getTransaction().commit();
     }
 
     @Test
     void update() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         Role admin = Role.builder()
                 .role("admin")
                 .build();
@@ -54,20 +40,15 @@ public class RoleTest {
         session.update(admin);
         session.flush();
         session.clear();
-        Role actual = session.get(Role.class, 1);
+
+        Role actual = session.get(Role.class, admin.getId());
 
         assertEquals(admin, actual);
         assertEquals(admin.getRole(), actual.getRole());
-
-        session.getTransaction().commit();
     }
 
     @Test
     void delete() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         Role admin = Role.builder()
                 .role("admin")
                 .build();
@@ -80,10 +61,8 @@ public class RoleTest {
         session.flush();
         session.clear();
 
-        Role role = session.get(Role.class, 1);
+        Role role = session.get(Role.class, admin.getId());
 
         assertNull(role);
-
-        session.getTransaction().commit();
     }
 }

@@ -4,26 +4,17 @@ import com.cpallas.entities.BankAccount;
 import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Status;
 import com.cpallas.entities.User;
-import com.cpallas.util.HibernateUtil;
-import lombok.Cleanup;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class CreditCardTest {
+public class CreditCardIT extends BaseTest {
 
     @Test
-    void create() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
+    void createAndGet() {
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -58,19 +49,13 @@ public class CreditCardTest {
         session.flush();
         session.clear();
 
-        CreditCard actualCreditCard = session.get(CreditCard.class, 1);
+        CreditCard actualCreditCard = session.get(CreditCard.class, creditCard.getId());
 
         assertEquals(creditCard, actualCreditCard);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void update() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -110,18 +95,13 @@ public class CreditCardTest {
         session.flush();
         session.clear();
 
-        CreditCard actualCreditCard = session.get(CreditCard.class, 1);
+        CreditCard actualCreditCard = session.get(CreditCard.class, creditCard.getId());
 
         assertEquals(creditCard, actualCreditCard);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void delete() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
 
         User user = User.builder()
                 .name("test")
@@ -159,10 +139,8 @@ public class CreditCardTest {
 
         session.delete(creditCard);
 
-        CreditCard actualCreditCard = session.get(CreditCard.class, 1);
+        CreditCard actualCreditCard = session.get(CreditCard.class, creditCard.getId());
 
         assertNull(actualCreditCard);
-
-        session.getTransaction().commit();
     }
 }

@@ -3,23 +3,15 @@ package com.cpallas.entities.crud;
 import com.cpallas.entities.Permission;
 import com.cpallas.entities.Role;
 import com.cpallas.entities.User;
-import com.cpallas.util.HibernateUtil;
-import lombok.Cleanup;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-public class PermissionTest {
+public class PermissionIT extends BaseTest {
 
     @Test
-    void create() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
+    void createAndGet() {
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -42,19 +34,13 @@ public class PermissionTest {
         session.flush();
         session.clear();
 
-        Permission actualPermission = session.get(Permission.class, 1);
+        Permission actualPermission = session.get(Permission.class, permission.getId());
 
         assertEquals(permission, actualPermission);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void update() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -82,19 +68,13 @@ public class PermissionTest {
         permission.getUser().setName("name");
         session.update(permission);
 
-        Permission actualPermission = session.get(Permission.class, 1);
+        Permission actualPermission = session.get(Permission.class, permission.getId());
 
         assertEquals(permission, actualPermission);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void delete() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -121,10 +101,8 @@ public class PermissionTest {
         session.flush();
         session.clear();
 
-        Permission actualPermission = session.get(Permission.class, 1);
+        Permission actualPermission = session.get(Permission.class, permission.getId());
 
         assertNull(actualPermission);
-
-        session.getTransaction().commit();
     }
 }

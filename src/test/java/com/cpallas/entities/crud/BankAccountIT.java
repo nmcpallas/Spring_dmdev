@@ -5,28 +5,22 @@ import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Role;
 import com.cpallas.entities.Status;
 import com.cpallas.entities.User;
-import com.cpallas.util.HibernateUtil;
-import lombok.Cleanup;
+
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
-public class BankAccountTest {
+public class BankAccountIT extends BaseTest{
 
     @Test
-    void create() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
+    void createAndGet() {
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -44,19 +38,13 @@ public class BankAccountTest {
         session.save(bankAccount);
         session.flush();
         session.clear();
-        BankAccount actualAccount = session.get(BankAccount.class, 1);
+        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
 
         assertEquals(bankAccount, actualAccount);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void update() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -91,24 +79,18 @@ public class BankAccountTest {
                 .build();
 
         session.save(creditCard);
-        bankAccount.setCreditCards(List.of(creditCard));
+        bankAccount.getCreditCards().add(creditCard);
         session.update(bankAccount);
         session.flush();
         session.clear();
 
-        BankAccount actualAccount = session.get(BankAccount.class, 1);
+        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
 
         assertEquals(bankAccount, actualAccount);
-
-        session.getTransaction().commit();
     }
 
     @Test
     void delete() {
-        @Cleanup SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-        @Cleanup Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
         User user = User.builder()
                 .name("test")
                 .surname("test")
@@ -126,16 +108,13 @@ public class BankAccountTest {
         session.save(bankAccount);
         session.flush();
         session.clear();
-        BankAccount actualAccount = session.get(BankAccount.class, 1);
 
-        session.delete(actualAccount);
+        session.delete(bankAccount);
         session.flush();
         session.clear();
 
-        Role role = session.get(Role.class, 1);
+        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
 
-        assertNull(role);
-
-        session.getTransaction().commit();
+        assertNull(actualAccount);
     }
 }

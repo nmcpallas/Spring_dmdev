@@ -8,7 +8,7 @@ create table user_info
 create table role
 (
     id      SERIAL      PRIMARY KEY ,
-    role    VARCHAR(10) UNIQUE
+    role    VARCHAR(10) NOT NULL UNIQUE
 );
 
 create table permission
@@ -23,19 +23,19 @@ create table permission
 create table bank_account
 (
     id              INT         PRIMARY KEY ,
-    account_number  BIGSERIAL   NOT NULL    CHECK ( account_number BETWEEN 5556000000000000 AND 5556999999999999 ),
+    account_number  BIGSERIAL   NOT NULL,
     balance         INT         NOT NULL ,
     start_date      DATE        NOT NULL ,
     end_date        DATE        NOT NULL ,
-    user_id         INT         NOT NULL    UNIQUE  REFERENCES user_info (id)
+    user_id         INT         NOT NULL    REFERENCES user_info (id)
 );
 
 create table credit_card
 (
     id                  INT         PRIMARY KEY ,
-    credit_card_number  BIGSERIAL   NOT NULL    CHECK ( credit_card_number BETWEEN 5556000000000000 AND 5556999999999999 ),
-    pin_code            INT         NOT NULL    CHECK ( pin_code BETWEEN 999 AND 9999 ),
-    cvv                 INT         NOT NULL    CHECK ( cvv BETWEEN 100 AND 999 ),
+    credit_card_number  BIGSERIAL   NOT NULL    UNIQUE ,
+    pin_code            INT         NOT NULL,
+    cvv                 INT         NOT NULL,
     credit_balance      INT,
     amount_balance      INT         NOT NULL ,
     current_balance     INT         NOT NULL ,

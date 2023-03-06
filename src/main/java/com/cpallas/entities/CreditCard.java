@@ -31,31 +31,43 @@ public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "credit_card_number", nullable = false)
+
+    @Column(name = "credit_card_number", nullable = false, unique = true)
     private Long creditCardNumber;
+
     @Column(name = "pin_code", nullable = false)
     private Integer pin;
+
     @Column(nullable = false)
     private Integer ccv;
+
     @Column(name = "credit_balance", nullable = false)
     private Integer creditBalance;
+
     @Column(name = "amount_balance", nullable = false)
     private Integer amountBalance;
+
     @Column(name = "current_balance", nullable = false)
     private Integer currentBalance;
-    @Column(name = "minimum_payment", nullable = false)
+
+    @Column(name = "minimum_payment")
     private Integer minimumPayment;
-    @Column(name = "monthly_payment", nullable = false)
+
+    @Column(name = "monthly_payment")
     private Integer monthlyPayment;
+
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
+
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
+
     @Column(nullable = false)
     private String status;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_account_id")
+    @JoinColumn(name = "bank_account_id", nullable = false)
     private BankAccount bankAccount;
 }
