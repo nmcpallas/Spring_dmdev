@@ -44,6 +44,8 @@ public class User {
     private List<BankAccount> bankAccounts = new ArrayList<>();
 
     public void addAccount(BankAccount bankAccount) {
+        if (bankAccounts == null)
+            bankAccounts = new ArrayList<>();
         bankAccounts.add(bankAccount);
         bankAccount.setUser(this);
     }

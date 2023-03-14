@@ -1,6 +1,9 @@
 package com.cpallas.entities.crud;
 
+import com.cpallas.dao.CreditCardDao;
+import com.cpallas.dto.CreditCardFilter;
 import com.cpallas.entities.BankAccount;
+import com.cpallas.entities.BaseTest;
 import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Status;
 import com.cpallas.entities.User;
@@ -49,7 +52,8 @@ public class CreditCardIT extends BaseTest {
         session.flush();
         session.clear();
 
-        CreditCard actualCreditCard = session.get(CreditCard.class, creditCard.getId());
+        CreditCardFilter filter = CreditCardFilter.builder().creditCardNumber(creditCard.getCreditCardNumber()).build();
+        CreditCard actualCreditCard = CreditCardDao.getInstance().findByCreditCard(session, filter);
 
         assertEquals(creditCard, actualCreditCard);
     }
@@ -95,7 +99,8 @@ public class CreditCardIT extends BaseTest {
         session.flush();
         session.clear();
 
-        CreditCard actualCreditCard = session.get(CreditCard.class, creditCard.getId());
+        CreditCardFilter filter = CreditCardFilter.builder().creditCardNumber(creditCard.getCreditCardNumber()).build();
+        CreditCard actualCreditCard = CreditCardDao.getInstance().findByCreditCard(session, filter);
 
         assertEquals(creditCard, actualCreditCard);
     }

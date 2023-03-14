@@ -1,5 +1,6 @@
 package com.cpallas.entities.crud;
 
+import com.cpallas.entities.BaseTest;
 import com.cpallas.entities.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

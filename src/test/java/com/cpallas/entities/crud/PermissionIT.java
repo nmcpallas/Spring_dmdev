@@ -1,5 +1,6 @@
 package com.cpallas.entities.crud;
 
+import com.cpallas.entities.BaseTest;
 import com.cpallas.entities.Permission;
 import com.cpallas.entities.Role;
 import com.cpallas.entities.User;

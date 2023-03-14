@@ -1,8 +1,10 @@
 package com.cpallas.entities.crud;
 
+import com.cpallas.dto.BankAccountFilter;
+import com.cpallas.dao.BankAccountDao;
 import com.cpallas.entities.BankAccount;
+import com.cpallas.entities.BaseTest;
 import com.cpallas.entities.CreditCard;
-import com.cpallas.entities.Role;
 import com.cpallas.entities.Status;
 import com.cpallas.entities.User;
 
@@ -10,14 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Slf4j
-public class BankAccountIT extends BaseTest{
+public class BankAccountIT extends BaseTest {
 
     @Test
     void createAndGet() {
@@ -38,7 +38,8 @@ public class BankAccountIT extends BaseTest{
         session.save(bankAccount);
         session.flush();
         session.clear();
-        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
+        BankAccountFilter filter = BankAccountFilter.builder().accountNumber(bankAccount.getAccountNumber()).build();
+        BankAccount actualAccount = BankAccountDao.getInstance().findByAccountNumber(session, filter);
 
         assertEquals(bankAccount, actualAccount);
     }
@@ -79,12 +80,13 @@ public class BankAccountIT extends BaseTest{
                 .build();
 
         session.save(creditCard);
-        bankAccount.getCreditCards().add(creditCard);
+        bankAccount.addCreditCard(creditCard);
         session.update(bankAccount);
         session.flush();
         session.clear();
 
-        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
+        BankAccountFilter filter = BankAccountFilter.builder().accountNumber(bankAccount.getAccountNumber()).build();
+        BankAccount actualAccount = BankAccountDao.getInstance().findByAccountNumber(session, filter);
 
         assertEquals(bankAccount, actualAccount);
     }
@@ -113,7 +115,8 @@ public class BankAccountIT extends BaseTest{
         session.flush();
         session.clear();
 
-        BankAccount actualAccount = session.get(BankAccount.class, bankAccount.getId());
+        BankAccountFilter filter = BankAccountFilter.builder().accountNumber(bankAccount.getAccountNumber()).build();
+        BankAccount actualAccount = BankAccountDao.getInstance().findByAccountNumber(session, filter);
 
         assertNull(actualAccount);
     }

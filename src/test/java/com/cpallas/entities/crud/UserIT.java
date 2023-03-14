@@ -1,6 +1,7 @@
 package com.cpallas.entities.crud;
 
 import com.cpallas.entities.BankAccount;
+import com.cpallas.entities.BaseTest;
 import com.cpallas.entities.User;
 import org.junit.jupiter.api.Test;
 
