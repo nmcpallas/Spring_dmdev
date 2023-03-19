@@ -1,7 +1,7 @@
 package com.cpallas.entities.dao;
 
 import com.cpallas.dto.BankAccountFilter;
-import com.cpallas.dao.BankAccountDao;
+import com.cpallas.dao.BankAccountRepository;
 import com.cpallas.entities.BankAccount;
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BankAccountDaoIT extends BaseDaoTest {
+public class BankAccountRepositoryIT extends BaseIntegrationTest {
 
-    private final BankAccountDao bankAccountDao = BankAccountDao.getInstance();
+    private final BankAccountRepository bankAccountRepository = new BankAccountRepository(session);
 
     @Test
     public void findAll() {
-        List<BankAccount> accounts = bankAccountDao.findAll(session);
+        List<BankAccount> accounts = bankAccountRepository.findAll();
 
         assertEquals(3, accounts.size());
 
@@ -29,7 +29,7 @@ public class BankAccountDaoIT extends BaseDaoTest {
         BankAccountFilter filter = BankAccountFilter.builder()
                 .accountNumber(2L)
                 .build();
-        BankAccount account = bankAccountDao.findByAccountNumber(session, filter);
+        BankAccount account = bankAccountRepository.findByAccountNumber(filter);
 
         assertEquals(LocalDate.of(2000, 10, 20), account.getStartDate());
         assertEquals(LocalDate.of(2003, 10, 20), account.getEndDate());
@@ -40,7 +40,7 @@ public class BankAccountDaoIT extends BaseDaoTest {
         LocalDate from = LocalDate.of(2000, 10, 20);
         LocalDate to = LocalDate.of(2001, 10, 20);
 
-        List<BankAccount> accounts = bankAccountDao.findLimitedBunkAccountByIntervalDateCreate(session, from, to, 2);
+        List<BankAccount> accounts = bankAccountRepository.findLimitedBunkAccountByIntervalDateCreate(from, to, 2);
 
         assertEquals(2, accounts.size());
         assertEquals(List.of(1L, 2L), accounts.stream().map(BankAccount::getAccountNumber).toList());

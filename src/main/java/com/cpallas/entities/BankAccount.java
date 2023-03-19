@@ -29,7 +29,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Entity
 @Table(name = "bank_account")
-public class BankAccount {
+public class BankAccount implements BaseEntity<Integer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

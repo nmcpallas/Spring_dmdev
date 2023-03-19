@@ -26,7 +26,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Entity
 @Table(name = "credit_card")
-public class CreditCard {
+public class CreditCard implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

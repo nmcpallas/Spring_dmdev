@@ -20,7 +20,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Role {
+public class Role implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

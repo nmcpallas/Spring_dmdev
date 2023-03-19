@@ -4,38 +4,28 @@ import com.cpallas.dto.BankAccountFilter;
 import com.cpallas.entities.BankAccount;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.hibernate.Session;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 
 import static com.cpallas.entities.QBankAccount.bankAccount;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class BankAccountDao {
+public class BankAccountRepository extends BaseRepository<Integer, BankAccount>{
 
-    private static final BankAccountDao INSTANCE = new BankAccountDao();
-
-    /**
-     * Возвращает все банковские счета
-     */
-    public List<BankAccount> findAll(Session session) {
-        return new JPAQuery<BankAccount>(session).select(bankAccount)
-                .from(bankAccount)
-                .fetch();
+    public BankAccountRepository(EntityManager entityManager) {
+        super(BankAccount.class, entityManager);
     }
 
     /**
      * Возвращает банковский счет с указанным номером
      */
-    public BankAccount findByAccountNumber(Session session, BankAccountFilter filter) {
+    public BankAccount findByAccountNumber(BankAccountFilter filter) {
         Predicate predicate = QPredicate.builder()
                 .add(filter.getAccountNumber(), bankAccount.accountNumber::eq)
                 .buildAnd();
 
-        return new JPAQuery<BankAccount>(session).select(bankAccount)
+        return new JPAQuery<BankAccount>(entityManager).select(bankAccount)
                 .from(bankAccount)
                 .where(predicate)
                 .fetchOne();
@@ -44,15 +34,11 @@ public class BankAccountDao {
     /**
      * Возвращает первые {limit} счетов, упорядоченных по дате создания (в порядке возрастания)
      */
-    public List<BankAccount> findLimitedBunkAccountByIntervalDateCreate(Session session, LocalDate from, LocalDate to, int limit) {
-        return new JPAQuery<BankAccount>(session).select(bankAccount)
+    public List<BankAccount> findLimitedBunkAccountByIntervalDateCreate(LocalDate from, LocalDate to, int limit) {
+        return new JPAQuery<BankAccount>(entityManager).select(bankAccount)
                 .from(bankAccount)
                 .where(bankAccount.startDate.between(from, to))
                 .limit(limit)
                 .fetch();
-    }
-
-    public static BankAccountDao getInstance() {
-        return INSTANCE;
     }
 }

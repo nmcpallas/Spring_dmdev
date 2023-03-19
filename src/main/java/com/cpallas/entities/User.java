@@ -26,7 +26,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString
 @Table(name = "user_info")
-public class User {
+public class User implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
