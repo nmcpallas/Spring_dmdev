@@ -15,7 +15,7 @@ public class BankAccountRepositoryIT extends BaseIntegrationTest {
     private final BankAccountRepository bankAccountRepository = new BankAccountRepository(session);
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<BankAccount> accounts = bankAccountRepository.findAll();
 
         assertEquals(3, accounts.size());
@@ -25,7 +25,7 @@ public class BankAccountRepositoryIT extends BaseIntegrationTest {
     }
 
     @Test
-    public void findByAccountNumber() {
+    void findByAccountNumber() {
         BankAccountFilter filter = BankAccountFilter.builder()
                 .accountNumber(2L)
                 .build();
@@ -36,7 +36,7 @@ public class BankAccountRepositoryIT extends BaseIntegrationTest {
     }
 
     @Test
-    public void findLimitedBunkAccountByIntervalDateCreate() {
+    void findLimitedBunkAccountByIntervalDateCreate() {
         LocalDate from = LocalDate.of(2000, 10, 20);
         LocalDate to = LocalDate.of(2001, 10, 20);
 

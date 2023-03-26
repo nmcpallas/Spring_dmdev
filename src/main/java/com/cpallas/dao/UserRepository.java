@@ -10,13 +10,13 @@ import javax.persistence.EntityManager;
 import static com.cpallas.entities.QBankAccount.bankAccount;
 import static com.cpallas.entities.QUser.user;
 
-public class UserRepository extends BaseRepository<Integer, User> {
+public class UserRepository extends AbstractRepositoryBase<Integer, User> {
 
     public UserRepository(EntityManager entityManager) {
         super(User.class, entityManager);
     }
 
-    public User findByBankAccountNumber(UserFilter filter) {
+    public User findByBankFilter(UserFilter filter) {
         return new JPAQuery<CreditCard>(entityManager).select(user)
                 .from(user)
                 .join(user.bankAccounts, bankAccount).fetchJoin()

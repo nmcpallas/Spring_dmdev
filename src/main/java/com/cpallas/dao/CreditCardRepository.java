@@ -9,13 +9,13 @@ import java.util.List;
 
 import static com.cpallas.entities.QCreditCard.creditCard;
 
-public class CreditCardRepository extends BaseRepository<Integer, CreditCard> {
+public class CreditCardRepository extends AbstractRepositoryBase<Integer, CreditCard> {
 
     public CreditCardRepository(EntityManager entityManager) {
         super(CreditCard.class, entityManager);
     }
 
-    public CreditCard findByCreditCard(CreditCardFilter filter) {
+    public CreditCard findByFilter(CreditCardFilter filter) {
         return new JPAQuery<CreditCard>(entityManager).select(creditCard)
                 .from(creditCard)
                 .where(QPredicate.builder().add(filter.getCreditCardNumber(), creditCard.creditCardNumber::eq).buildOr())

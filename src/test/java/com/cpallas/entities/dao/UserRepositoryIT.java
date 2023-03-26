@@ -14,16 +14,16 @@ public class UserRepositoryIT extends BaseIntegrationTest {
     private final UserRepository userRepository = new UserRepository(session);
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<User> users = userRepository.findAll();
 
         assertEquals(5, users.size());
     }
 
     @Test
-    public void findByBankAccountNumber() {
+    void findByBankAccountNumber() {
         UserFilter filter = UserFilter.builder().accountNumber(1L).build();
-        User user = userRepository.findByBankAccountNumber(filter);
+        User user = userRepository.findByBankFilter(filter);
 
         assertEquals("Anay", user.getName());
         assertEquals("Chan", user.getSurname());

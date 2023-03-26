@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import java.lang.reflect.Proxy;
 
-public class BaseIntegrationTest {
+public abstract class BaseIntegrationTest {
 
     protected static SessionFactory sessionFactory;
     protected static Session session;
@@ -21,12 +21,12 @@ public class BaseIntegrationTest {
         sessionFactory = HibernateUtil.buildSessionFactory();
         session = (Session) Proxy.newProxyInstance(SessionFactory.class.getClassLoader(), new Class[]{Session.class},
                 (proxy, method, args) -> method.invoke(sessionFactory.getCurrentSession(), args));
-        TestDataImporter.importData(sessionFactory);
     }
 
     @BeforeEach
     public void beforeEach() {
         session.beginTransaction();
+        TestDataImporter.importData(session);
     }
 
     @AfterEach

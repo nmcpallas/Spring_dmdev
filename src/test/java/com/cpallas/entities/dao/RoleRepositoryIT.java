@@ -14,7 +14,7 @@ public class RoleRepositoryIT extends BaseIntegrationTest {
     private final RoleRepository roleRepository = new RoleRepository(session);
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<Role> roles = roleRepository.findAll();
 
         assertEquals(2, roles.size());

@@ -15,14 +15,14 @@ public class PermissionRepositoryIT extends BaseIntegrationTest {
     private final PermissionRepository permissionRepository = new PermissionRepository(session);
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<Permission> permissions = permissionRepository.findAll();
 
         assertEquals(5, permissions.size());
     }
 
     @Test
-    public void findAllByRole() {
+    void findAllByRole() {
         PermissionFilter filter = PermissionFilter.builder().role(RoleValue.ADMIN.getStatus()).build();
         List<Permission> permissions = permissionRepository.findAllByRole(filter);
 

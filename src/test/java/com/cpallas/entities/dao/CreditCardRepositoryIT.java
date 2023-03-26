@@ -15,7 +15,7 @@ public class CreditCardRepositoryIT extends BaseIntegrationTest {
     private final CreditCardRepository creditCardRepository = new CreditCardRepository(session);
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<CreditCard> creditCards = creditCardRepository.findAll();
 
         assertEquals(3, creditCards.size());
@@ -23,15 +23,15 @@ public class CreditCardRepositoryIT extends BaseIntegrationTest {
     }
 
     @Test
-    public void findByCreditCard() {
+    void findByCreditCard() {
         CreditCardFilter filter = CreditCardFilter.builder().creditCardNumber(1L).build();
-        CreditCard creditCard = creditCardRepository.findByCreditCard(filter);
+        CreditCard creditCard = creditCardRepository.findByFilter(filter);
 
         assertEquals(1L, creditCard.getCreditCardNumber());
     }
 
     @Test
-    public void findAllWithCredit() {
+    void findAllWithCredit() {
         List<CreditCard> creditCards = creditCardRepository.findAllWithCredit();
 
         assertEquals(2, creditCards.size());
@@ -39,7 +39,7 @@ public class CreditCardRepositoryIT extends BaseIntegrationTest {
     }
 
     @Test
-    public void findAllByStatus() {
+    void findAllByStatus() {
         CreditCardFilter filter = CreditCardFilter.builder().status(Status.ACTIVE.getStatus()).build();
         List<CreditCard> creditCards = creditCardRepository.findAllByStatus(filter);
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.cpallas.entities.QBankAccount.bankAccount;
 
-public class BankAccountRepository extends BaseRepository<Integer, BankAccount>{
+public class BankAccountRepository extends AbstractRepositoryBase<Integer, BankAccount> {
 
     public BankAccountRepository(EntityManager entityManager) {
         super(BankAccount.class, entityManager);

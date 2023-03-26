@@ -11,7 +11,7 @@ import java.util.List;
 import static com.cpallas.entities.QPermission.permission;
 import static com.cpallas.entities.QRole.role1;
 
-public class PermissionRepository extends BaseRepository<Integer, Permission> {
+public class PermissionRepository extends AbstractRepositoryBase<Integer, Permission> {
 
     public PermissionRepository(EntityManager entityManager) {
         super(Permission.class, entityManager);

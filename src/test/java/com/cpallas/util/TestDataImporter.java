@@ -19,9 +19,7 @@ import static com.cpallas.entities.RoleValue.USER;
 @UtilityClass
 public class TestDataImporter {
 
-    public void importData(SessionFactory sessionFactory) {
-        @Cleanup Session session = sessionFactory.openSession();
-
+    public void importData(Session session) {
         Role admin = saveRole(session, ADMIN.getStatus());
         Role user = saveRole(session, USER.getStatus());
 
