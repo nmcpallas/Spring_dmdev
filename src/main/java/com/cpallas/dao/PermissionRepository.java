@@ -4,6 +4,7 @@ import com.cpallas.dto.PermissionFilter;
 import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Permission;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 import static com.cpallas.entities.QPermission.permission;
 import static com.cpallas.entities.QRole.role1;
 
+@Repository
 public class PermissionRepository extends AbstractRepositoryBase<Integer, Permission> {
 
     public PermissionRepository(EntityManager entityManager) {

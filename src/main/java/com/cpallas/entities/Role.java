@@ -14,8 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 
 @Data
-@ToString
-@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

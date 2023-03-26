@@ -3,12 +3,14 @@ package com.cpallas.dao;
 import com.cpallas.dto.CreditCardFilter;
 import com.cpallas.entities.CreditCard;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
 import static com.cpallas.entities.QCreditCard.creditCard;
 
+@Repository
 public class CreditCardRepository extends AbstractRepositoryBase<Integer, CreditCard> {
 
     public CreditCardRepository(EntityManager entityManager) {

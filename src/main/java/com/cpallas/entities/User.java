@@ -23,8 +23,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EqualsAndHashCode
-@ToString
 @Table(name = "user_info")
 public class User implements BaseEntity<Integer> {
 

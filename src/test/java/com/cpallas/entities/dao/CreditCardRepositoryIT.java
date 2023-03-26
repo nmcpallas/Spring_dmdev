@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreditCardRepositoryIT extends BaseIntegrationTest {
 
-    private final CreditCardRepository creditCardRepository = new CreditCardRepository(session);
+    private final CreditCardRepository creditCardRepository = new CreditCardRepository(entityManager);
 
     @Test
     void findAll() {

@@ -20,8 +20,6 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-@ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

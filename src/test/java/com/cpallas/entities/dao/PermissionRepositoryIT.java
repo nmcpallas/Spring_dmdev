@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PermissionRepositoryIT extends BaseIntegrationTest {
 
-    private final PermissionRepository permissionRepository = new PermissionRepository(session);
+    private final PermissionRepository permissionRepository = new PermissionRepository(entityManager);
 
     @Test
     void findAll() {

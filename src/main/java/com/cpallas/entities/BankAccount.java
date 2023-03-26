@@ -25,8 +25,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@EqualsAndHashCode
 @Entity
 @Table(name = "bank_account")
 public class BankAccount implements BaseEntity<Integer> {

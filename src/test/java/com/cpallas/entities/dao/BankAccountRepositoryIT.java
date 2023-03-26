@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BankAccountRepositoryIT extends BaseIntegrationTest {
 
-    private final BankAccountRepository bankAccountRepository = new BankAccountRepository(session);
+    private final BankAccountRepository bankAccountRepository = new BankAccountRepository(entityManager);
 
     @Test
     void findAll() {

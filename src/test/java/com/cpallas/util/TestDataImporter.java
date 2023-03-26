@@ -11,6 +11,7 @@ import lombok.experimental.UtilityClass;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
 import static com.cpallas.entities.RoleValue.ADMIN;
@@ -19,53 +20,53 @@ import static com.cpallas.entities.RoleValue.USER;
 @UtilityClass
 public class TestDataImporter {
 
-    public void importData(Session session) {
-        Role admin = saveRole(session, ADMIN.getStatus());
-        Role user = saveRole(session, USER.getStatus());
+    public void importData(EntityManager entityManager) {
+        Role admin = saveRole(entityManager, ADMIN.getStatus());
+        Role user = saveRole(entityManager, USER.getStatus());
 
-        User alex = saveUser(session, "Alex", "Sizov");
-        User anay = saveUser(session, "Anay", "Chan");
-        User ruslan = saveUser(session, "Ruslan", "Kamalov");
-        User aisylu = saveUser(session, "Aisylu", "Mutakharova");
-        User nail = saveUser(session, "Nail", "Mukminov");
+        User alex = saveUser(entityManager, "Alex", "Sizov");
+        User anay = saveUser(entityManager, "Anay", "Chan");
+        User ruslan = saveUser(entityManager, "Ruslan", "Kamalov");
+        User aisylu = saveUser(entityManager, "Aisylu", "Mutakharova");
+        User nail = saveUser(entityManager, "Nail", "Mukminov");
 
-        savePermission(session, "alex123", "123141", alex, admin);
-        savePermission(session, "anay123", "123141", anay, user);
-        savePermission(session, "ruslan123", "123141", ruslan, user);
-        savePermission(session, "aisylu123", "123141", aisylu, user);
-        savePermission(session, "nail123", "123141", nail, admin);
+        savePermission(entityManager, "alex123", "123141", alex, admin);
+        savePermission(entityManager, "anay123", "123141", anay, user);
+        savePermission(entityManager, "ruslan123", "123141", ruslan, user);
+        savePermission(entityManager, "aisylu123", "123141", aisylu, user);
+        savePermission(entityManager, "nail123", "123141", nail, admin);
 
-        BankAccount anyasBankAccount = saveBankAccount(session, 1L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), anay);
-        BankAccount ruslansBankAccount = saveBankAccount(session, 2L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), ruslan);
-        BankAccount aisylusBankAccount = saveBankAccount(session, 3L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), aisylu);
+        BankAccount anyasBankAccount = saveBankAccount(entityManager, 1L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), anay);
+        BankAccount ruslansBankAccount = saveBankAccount(entityManager, 2L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), ruslan);
+        BankAccount aisylusBankAccount = saveBankAccount(entityManager, 3L, 100, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), aisylu);
 
-        saveCreditCard(session, 1L, 2010, 347, 50, 300, 250, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, anyasBankAccount);
-        saveCreditCard(session, 2L, 2010, 347, 2, 300, 299, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, ruslansBankAccount);
-        saveCreditCard(session, 3L, 2010, 347, 0, 300, 300, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, aisylusBankAccount);
+        saveCreditCard(entityManager, 1L, 2010, 347, 50, 300, 250, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, anyasBankAccount);
+        saveCreditCard(entityManager, 2L, 2010, 347, 2, 300, 299, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, ruslansBankAccount);
+        saveCreditCard(entityManager, 3L, 2010, 347, 0, 300, 300, null, null, LocalDate.of(2000, 10, 20), LocalDate.of(2003, 10, 20), Status.ACTIVE, aisylusBankAccount);
     }
 
-    private Role saveRole(Session session, String role) {
+    private Role saveRole(EntityManager entityManager, String role) {
         Role entityRole = Role.builder()
                 .role(role)
                 .build();
 
-        session.save(entityRole);
+        entityManager.persist(entityRole);
 
         return entityRole;
     }
 
-    private User saveUser(Session session, String name, String surname) {
+    private User saveUser(EntityManager entityManager, String name, String surname) {
         User entityUser = User.builder()
                 .name(name)
                 .surname(surname)
                 .build();
 
-        session.save(entityUser);
+        entityManager.persist(entityUser);
 
         return entityUser;
     }
 
-    private Permission savePermission(Session session, String login, String password, User user, Role role) {
+    private Permission savePermission(EntityManager entityManager, String login, String password, User user, Role role) {
         Permission entityPermission = Permission.builder()
                 .login(login)
                 .passowrd(password)
@@ -73,12 +74,12 @@ public class TestDataImporter {
                 .role(role)
                 .build();
 
-        session.save(entityPermission);
+        entityManager.persist(entityPermission);
 
         return entityPermission;
     }
 
-    private BankAccount saveBankAccount(Session session, Long accountNumber, Integer balance, LocalDate startDate, LocalDate endDate, User user) {
+    private BankAccount saveBankAccount(EntityManager entityManager, Long accountNumber, Integer balance, LocalDate startDate, LocalDate endDate, User user) {
         BankAccount entityBankAccount = BankAccount.builder()
                 .accountNumber(accountNumber)
                 .balance(balance)
@@ -87,12 +88,12 @@ public class TestDataImporter {
                 .user(user)
                 .build();
 
-        session.save(entityBankAccount);
+        entityManager.persist(entityBankAccount);
 
         return entityBankAccount;
     }
 
-    private CreditCard saveCreditCard(Session session, Long creditCardNumber, Integer pin, Integer ccv, Integer creditBalance, Integer amountBalance, Integer currentBalance, Integer minimumPayment, Integer monthlyPayment, LocalDate startDate, LocalDate endDate, Status status, BankAccount bankAccount) {
+    private CreditCard saveCreditCard(EntityManager entityManager, Long creditCardNumber, Integer pin, Integer ccv, Integer creditBalance, Integer amountBalance, Integer currentBalance, Integer minimumPayment, Integer monthlyPayment, LocalDate startDate, LocalDate endDate, Status status, BankAccount bankAccount) {
         CreditCard entityCreditCard = CreditCard.builder()
                 .creditCardNumber(creditCardNumber)
                 .pin(pin)
@@ -108,7 +109,7 @@ public class TestDataImporter {
                 .bankAccount(bankAccount)
                 .build();
 
-        session.save(entityCreditCard);
+        entityManager.persist(entityCreditCard);
 
         return entityCreditCard;
     }

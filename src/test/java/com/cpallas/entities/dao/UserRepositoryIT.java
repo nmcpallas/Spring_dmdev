@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserRepositoryIT extends BaseIntegrationTest {
 
-    private final UserRepository userRepository = new UserRepository(session);
+    private final UserRepository userRepository = new UserRepository(entityManager);
 
     @Test
     void findAll() {

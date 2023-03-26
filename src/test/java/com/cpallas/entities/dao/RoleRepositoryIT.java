@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RoleRepositoryIT extends BaseIntegrationTest {
 
-    private final RoleRepository roleRepository = new RoleRepository(session);
+    private final RoleRepository roleRepository = new RoleRepository(entityManager);
 
     @Test
     void findAll() {

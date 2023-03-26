@@ -4,6 +4,7 @@ import com.cpallas.dto.BankAccountFilter;
 import com.cpallas.entities.BankAccount;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQuery;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static com.cpallas.entities.QBankAccount.bankAccount;
 
+@Repository
 public class BankAccountRepository extends AbstractRepositoryBase<Integer, BankAccount> {
 
     public BankAccountRepository(EntityManager entityManager) {
