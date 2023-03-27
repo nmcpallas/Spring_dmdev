@@ -3,6 +3,7 @@ package com.cpallas.entities.dao;
 import com.cpallas.dto.BankAccountFilter;
 import com.cpallas.dao.BankAccountRepository;
 import com.cpallas.entities.BankAccount;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -10,9 +11,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RequiredArgsConstructor
 public class BankAccountRepositoryIT extends BaseIntegrationTest {
 
-    private final BankAccountRepository bankAccountRepository = new BankAccountRepository(entityManager);
+    private final BankAccountRepository bankAccountRepository;
 
     @Test
     void findAll() {

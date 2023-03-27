@@ -4,15 +4,17 @@ import com.cpallas.dao.CreditCardRepository;
 import com.cpallas.dto.CreditCardFilter;
 import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Status;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RequiredArgsConstructor
 public class CreditCardRepositoryIT extends BaseIntegrationTest {
 
-    private final CreditCardRepository creditCardRepository = new CreditCardRepository(entityManager);
+    private final CreditCardRepository creditCardRepository;
 
     @Test
     void findAll() {

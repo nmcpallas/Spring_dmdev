@@ -4,15 +4,17 @@ import com.cpallas.dao.PermissionRepository;
 import com.cpallas.dto.PermissionFilter;
 import com.cpallas.entities.Permission;
 import com.cpallas.entities.RoleValue;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RequiredArgsConstructor
 public class PermissionRepositoryIT extends BaseIntegrationTest {
 
-    private final PermissionRepository permissionRepository = new PermissionRepository(entityManager);
+    private final PermissionRepository permissionRepository;
 
     @Test
     void findAll() {
