@@ -57,9 +57,6 @@ public class BankAccount implements BaseEntity<Integer> {
     private List<CreditCard> creditCards = new ArrayList<>();
 
     public void addCreditCard(CreditCard creditCard) {
-        if (creditCards == null) {
-            creditCards = new ArrayList<>();
-        }
         creditCards.add(creditCard);
         creditCard.setBankAccount(this);
     }

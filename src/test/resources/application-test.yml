@@ -1,10 +1,6 @@
-logging:
-  level:
-    root: INFO
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
+  liquibase:
+    enabled: false
   datasource:
     username: postgres
     password: postgres
@@ -14,7 +10,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
-        current_session_context_class: thread
         show_sql: true
         format_sql: true
         hbm2ddl:
