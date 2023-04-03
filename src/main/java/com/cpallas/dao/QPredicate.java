@@ -19,8 +19,9 @@ public class QPredicate {
     }
 
     public <T> QPredicate add(T object, Function<T, Predicate> function) {
-        if (object != null)
+        if (object != null) {
             predicates.add(function.apply(object));
+        }
         return this;
     }
 

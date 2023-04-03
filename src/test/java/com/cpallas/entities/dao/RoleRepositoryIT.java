@@ -2,6 +2,7 @@ package com.cpallas.entities.dao;
 
 import com.cpallas.dao.RoleRepository;
 import com.cpallas.entities.Role;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -9,12 +10,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@RequiredArgsConstructor
 public class RoleRepositoryIT extends BaseIntegrationTest {
 
-    private final RoleRepository roleRepository = new RoleRepository(session);
+    private final RoleRepository roleRepository;
 
     @Test
-    public void findAll() {
+    void findAll() {
         List<Role> roles = roleRepository.findAll();
 
         assertEquals(2, roles.size());
