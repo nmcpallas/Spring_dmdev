@@ -29,7 +29,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Entity
 @Table(name = "bank_account")
-public class BankAccount {
+public class BankAccount implements BaseEntity<Integer>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,6 +59,8 @@ public class BankAccount {
     private List<CreditCard> creditCards = new ArrayList<>();
 
     public void addCreditCard(CreditCard creditCard) {
+        if (creditCards == null)
+            creditCards = new ArrayList<>();
         creditCards.add(creditCard);
         creditCard.setBankAccount(this);
     }
