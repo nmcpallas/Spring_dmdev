@@ -1,4 +1,4 @@
-package com.cpallas.dao;
+package com.cpallas.repository;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
