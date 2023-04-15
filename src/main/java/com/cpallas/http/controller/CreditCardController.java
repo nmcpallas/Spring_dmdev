@@ -1,6 +1,7 @@
 package com.cpallas.http.controller;
 
 import com.cpallas.dto.CreditCardCreateEditDto;
+import com.cpallas.entities.Status;
 import com.cpallas.service.CreditCardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public class CreditCardController {
         return service.findById(id)
                 .map(card -> {
                     model.addAttribute("card", card);
+                    model.addAttribute("status", Status.values());
                     return "card/card";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -40,8 +42,9 @@ public class CreditCardController {
     @GetMapping("/registration")
     public String registration(Model model, @ModelAttribute("user") CreditCardCreateEditDto card) {
         model.addAttribute("card", card);
+        model.addAttribute("status", Status.values());
 
-        return "user/registration";
+        return "card/registration";
     }
 
     @PostMapping
@@ -50,7 +53,7 @@ public class CreditCardController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Integer id, @RequestBody CreditCardCreateEditDto card) {
+    public String update(@PathVariable("id") Integer id, @ModelAttribute CreditCardCreateEditDto card) {
         return service.update(id, card)
                 .map(it -> "redirect:/cards/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

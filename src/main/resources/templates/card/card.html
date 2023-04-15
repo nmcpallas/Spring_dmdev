@@ -12,8 +12,8 @@
             <label for="pin">pin:
                 <input id="pin" type="text" name="pin" th:value="*{pin}">
             </label><br>
-            <label for="ccv">Lastname:
-                <input id="ccv" type="text" name="ccv" th:value="*{ccv}">
+            <label for="cvv">Lastname:
+                <input id="cvv" type="text" name="cvv" th:value="*{cvv}">
             </label><br>
             <label for="creditBalance">creditBalance:
                 <input id="creditBalance" type="text" name="creditBalance" th:value="*{creditBalance}">
@@ -36,15 +36,16 @@
             <label for="endDate">endDate:
                 <input id="endDate" type="date" name="endDate" th:value="*{endDate}">
             </label><br>
-            <label for="status">status:
-                <input id="status" type="text" name="status" th:value="*{status}">
-            </label><br>
+            <div th:each="status : ${status}">
+                <input th:id="${status}" type="radio" name="status" th:value="${status}" th:checked="${role == card.status}">
+                <label th:for="${status}" th:text="${status}">Role name</label>
+            </div>
             <label for="bankAccountId">bankAccountId:
-                <input id="bankAccountId" type="text" name="bankAccountId" th:value="*{bankAccountId}">
+                <input id="bankAccountId" type="text" name="bankAccountId" th:value="*{bankAccountDto.id}">
             </label><br>
             <button type="submit">Update</button>
         </form>
-        <form th:action="@{/cards/{cardId}/delete(cardId=${card.id})}" th:if="${card.status.name() == 'canceled'}" method="post">
+        <form th:action="@{/cards/{cardId}/delete(cardId=${card.id})}" th:if="${card.status == 'CANCELED'}" method="post">
             <button type="submit">Remove</button>
         </form>
     </body>

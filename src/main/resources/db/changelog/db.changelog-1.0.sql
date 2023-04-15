@@ -7,6 +7,7 @@ create table user_info
     name    VARCHAR(10) NOT NULL ,
     surname VARCHAR(10) NOT NULL
 );
+--rollback DROP TABLE IF EXISTS user_info
 
 --changeset cpallas:2
 create table role
@@ -14,6 +15,7 @@ create table role
     id      SERIAL      PRIMARY KEY ,
     role    VARCHAR(10) NOT NULL UNIQUE
 );
+--rollback DROP TABLE IF EXISTS role
 
 --changeset cpallas:3
 create table permission
@@ -24,22 +26,24 @@ create table permission
     user_id     INT         NOT NULL    UNIQUE  REFERENCES user_info (id) ,
     role_id     INT         NOT NULL    REFERENCES role (id)
 );
+--rollback DROP TABLE IF EXISTS permission
 
 --changeset cpallas:4
 create table bank_account
 (
-    id              INT         PRIMARY KEY ,
+    id              SERIAL         PRIMARY KEY ,
     account_number  BIGSERIAL   NOT NULL,
     balance         INT         NOT NULL ,
     start_date      DATE        NOT NULL ,
     end_date        DATE        NOT NULL ,
     user_id         INT         NOT NULL    REFERENCES user_info (id)
 );
+--rollback DROP TABLE IF EXISTS bank_account
 
 --changeset cpallas:5
 create table credit_card
 (
-    id                  INT         PRIMARY KEY ,
+    id                  SERIAL         PRIMARY KEY ,
     credit_card_number  BIGSERIAL   NOT NULL    UNIQUE ,
     pin_code            INT         NOT NULL,
     cvv                 INT         NOT NULL,
@@ -53,3 +57,4 @@ create table credit_card
     status              VARCHAR(10) NOT NULL ,
     bank_account_id     INT         NOT NULL    REFERENCES bank_account (id)
 );
+--rollback DROP TABLE IF EXISTS credit_card

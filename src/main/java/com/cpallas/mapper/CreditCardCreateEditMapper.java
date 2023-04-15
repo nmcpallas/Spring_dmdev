@@ -33,7 +33,7 @@ public class CreditCardCreateEditMapper implements Mapper<CreditCardCreateEditDt
     private void copy(CreditCardCreateEditDto object, CreditCard creditCard) {
         creditCard.setCreditCardNumber(object.getCreditCardNumber());
         creditCard.setPin(object.getPin());
-        creditCard.setCcv(object.getCcv());
+        creditCard.setCvv(object.getCvv());
         creditCard.setCreditBalance(object.getCreditBalance());
         creditCard.setAmountBalance(object.getAmountBalance());
         creditCard.setCurrentBalance(object.getCurrentBalance());

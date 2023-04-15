@@ -37,7 +37,7 @@ public class CreditCard implements BaseEntity<Integer> {
     private Integer pin;
 
     @Column(nullable = false)
-    private Integer ccv;
+    private Integer cvv;
 
     @Column(name = "credit_balance", nullable = false)
     private Integer creditBalance;
