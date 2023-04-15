@@ -29,25 +29,31 @@ public class CreditCardRestController {
 
     @GetMapping
     public ResponseEntity<List<CreditCardReadDto>> findAll() {
-        return ResponseEntity.status(200).body(service.findAll());
+        return ResponseEntity.status(HttpStatus.OK).body(service.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CreditCardReadDto> findById(@PathVariable("id") Integer id) {
-        return ResponseEntity.status(200).body(service.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service
+                        .findById(id)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<CreditCardReadDto> create(@RequestBody CreditCardCreateEditDto creditCardDto) {
-        return ResponseEntity.status(200).body(service.create(creditCardDto));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service.create(creditCardDto));
     }
 
     @PutMapping("/{id}/update")
     public ResponseEntity<CreditCardReadDto> update(@PathVariable("id") Integer id, @RequestBody CreditCardCreateEditDto creditCardDto) {
-        return ResponseEntity.status(200).body(service.update(id, creditCardDto)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service
+                        .update(id, creditCardDto)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND))
+                );
     }
 
     @DeleteMapping("/{id}/delete")

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 public class BankAccountReadMapper implements Mapper<BankAccount, BankAccountDto> {
 
     public BankAccountDto map(BankAccount object) {
-        return new BankAccountDto(object.getId(),
-                object.getAccountNumber());
+        return new BankAccountDto(
+                object.getId(),
+                object.getAccountNumber()
+        );
     }
 }

@@ -10,26 +10,15 @@ import java.time.LocalDate;
 public class CreditCardCreateEditDto {
 
     Long creditCardNumber;
-
     Integer pin;
-
     Integer ccv;
-
     Integer creditBalance;
-
     Integer amountBalance;
-
     Integer currentBalance;
-
     Integer minimumPayment;
-
     Integer monthlyPayment;
-
     LocalDate startDate;
-
     LocalDate endDate;
-
     String status;
-
     Integer bankAccountId;
 }

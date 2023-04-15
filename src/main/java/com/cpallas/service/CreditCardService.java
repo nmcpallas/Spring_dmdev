@@ -18,13 +18,12 @@ import java.util.Optional;
 public class CreditCardService {
 
     private final CreditCardRepository repository;
-
     private final CreditCardCreateEditMapper editMapper;
-
     private final CreditCardReadMapper readMapper;
 
     public List<CreditCardReadDto> findAll() {
-        return repository.findAll().stream()
+        return repository.findAll()
+                .stream()
                 .map(readMapper::map)
                 .toList();
     }
@@ -36,7 +35,6 @@ public class CreditCardService {
 
     @Transactional
     public CreditCardReadDto create(CreditCardCreateEditDto createEditCard) {
-
         return Optional.of(createEditCard)
                 .map(editMapper::map)
                 .map(repository::save)
@@ -55,10 +53,12 @@ public class CreditCardService {
 
     @Transactional
     public boolean delete(Integer id) {
-        return repository.findById(id).map(entity -> {
-            repository.delete(entity);
-            repository.flush();
-            return true;
-        }).orElse(false);
+        return repository.findById(id)
+                .map(entity -> {
+                    repository.delete(entity);
+                    repository.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 }

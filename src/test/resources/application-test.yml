@@ -1,6 +1,3 @@
-spring:
-  liquibase:
-    enabled: false
   datasource:
     username: postgres
     password: postgres

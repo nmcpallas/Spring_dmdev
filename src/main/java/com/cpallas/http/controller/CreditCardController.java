@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-@RequestMapping("/cards")
 @RequiredArgsConstructor
+@RequestMapping("/cards")
 @Controller
 public class CreditCardController {
 
@@ -30,9 +29,10 @@ public class CreditCardController {
 
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Integer id, Model model) {
-        return service.findById(id).map(card -> {
-            model.addAttribute("card", card);
-            return "card/card";
+        return service.findById(id)
+                .map(card -> {
+                    model.addAttribute("card", card);
+                    return "card/card";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -57,7 +57,6 @@ public class CreditCardController {
     }
 
     @PostMapping("/{id}/delete")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public String delete(@PathVariable("id") Integer id) {
         if (!service.delete(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
