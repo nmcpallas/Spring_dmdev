@@ -90,11 +90,11 @@ public class TestDataImporter {
         return entityBankAccount;
     }
 
-    private CreditCard saveCreditCard(EntityManager entityManager, Long creditCardNumber, Integer pin, Integer ccv, Integer creditBalance, Integer amountBalance, Integer currentBalance, Integer minimumPayment, Integer monthlyPayment, LocalDate startDate, LocalDate endDate, Status status, BankAccount bankAccount) {
+    private CreditCard saveCreditCard(EntityManager entityManager, Long creditCardNumber, Integer pin, Integer cvv, Integer creditBalance, Integer amountBalance, Integer currentBalance, Integer minimumPayment, Integer monthlyPayment, LocalDate startDate, LocalDate endDate, Status status, BankAccount bankAccount) {
         CreditCard entityCreditCard = CreditCard.builder()
                 .creditCardNumber(creditCardNumber)
                 .pin(pin)
-                .ccv(ccv)
+                .cvv(cvv)
                 .creditBalance(creditBalance)
                 .amountBalance(amountBalance)
                 .currentBalance(currentBalance)
@@ -102,7 +102,7 @@ public class TestDataImporter {
                 .monthlyPayment(monthlyPayment)
                 .startDate(startDate)
                 .endDate(endDate)
-                .status(status.getStatus())
+                .status(status.name())
                 .bankAccount(bankAccount)
                 .build();
 

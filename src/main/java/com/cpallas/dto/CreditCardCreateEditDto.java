@@ -11,7 +11,7 @@ public class CreditCardCreateEditDto {
 
     Long creditCardNumber;
     Integer pin;
-    Integer ccv;
+    Integer cvv;
     Integer creditBalance;
     Integer amountBalance;
     Integer currentBalance;

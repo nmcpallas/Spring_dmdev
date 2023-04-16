@@ -23,7 +23,7 @@ public class CreditCardReadMapper implements Mapper<CreditCard, CreditCardReadDt
                 object.getId(),
                 object.getCreditCardNumber(),
                 object.getPin(),
-                object.getCcv(),
+                object.getCvv(),
                 object.getCreditBalance(),
                 object.getAmountBalance(),
                 object.getCurrentBalance(),

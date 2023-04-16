@@ -44,7 +44,7 @@ public class CreditCardRepositoryIT extends BaseIntegrationTest {
 
     @Test
     void findAllByStatus() {
-        List<CreditCard> creditCards = creditCardRepository.findAllByStatus(Status.ACTIVE.getStatus());
+        List<CreditCard> creditCards = creditCardRepository.findAllByStatus(Status.ACTIVE.name());
 
         assertEquals(3, creditCards.size());
         assertEquals(List.of(1L, 2L, 3L), creditCards.stream().map(CreditCard::getCreditCardNumber).toList());

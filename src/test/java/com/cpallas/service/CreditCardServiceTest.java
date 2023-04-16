@@ -33,7 +33,7 @@ public class CreditCardServiceTest extends BaseIntegrationTest {
         Optional<CreditCardReadDto> result = service.findById(2);
 
         assertTrue(result.isPresent());
-        result.ifPresent(user -> assertEquals(Status.ACTIVE.getStatus(), user.getStatus()));
+        result.ifPresent(user -> assertEquals(Status.ACTIVE.name(), user.getStatus()));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CreditCardServiceTest extends BaseIntegrationTest {
                 0,
                 LocalDate.of(2000, 10, 10),
                 LocalDate.of(2005, 10, 10),
-                Status.ACTIVE.getStatus(),
+                Status.ACTIVE.name(),
                 3
         );
 
@@ -81,7 +81,7 @@ public class CreditCardServiceTest extends BaseIntegrationTest {
                 0,
                 LocalDate.of(2000, 10, 10),
                 LocalDate.of(2005, 10, 10),
-                Status.ACTIVE.getStatus(),
+                Status.ACTIVE.name(),
                 3
         );
 
