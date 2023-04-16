@@ -1,20 +1,23 @@
 package com.cpallas.entities.dao;
 
 import com.cpallas.dao.PermissionRepository;
-import com.cpallas.dto.PermissionFilter;
 import com.cpallas.entities.Permission;
 import com.cpallas.entities.RoleValue;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RequiredArgsConstructor
 public class PermissionRepositoryIT extends BaseIntegrationTest {
 
     private final PermissionRepository permissionRepository;
+
+    @Autowired
+    public PermissionRepositoryIT(PermissionRepository permissionRepository) {
+        this.permissionRepository = permissionRepository;
+    }
 
     @Test
     void findAll() {
@@ -25,8 +28,7 @@ public class PermissionRepositoryIT extends BaseIntegrationTest {
 
     @Test
     void findAllByRole() {
-        PermissionFilter filter = PermissionFilter.builder().role(RoleValue.ADMIN.getStatus()).build();
-        List<Permission> permissions = permissionRepository.findAllByRole(filter);
+        List<Permission> permissions = permissionRepository.findAllByRole(RoleValue.ADMIN.getRole());
 
         assertEquals(2, permissions.size());
     }

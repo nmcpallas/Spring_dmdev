@@ -1,10 +1,4 @@
-logging:
-  level:
-    root: INFO
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
   datasource:
     username: postgres
     password: postgres
@@ -13,7 +7,5 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL10Dialect
-        current_session_context_class: thread
         show_sql: true
         format_sql: true

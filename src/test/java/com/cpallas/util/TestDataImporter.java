@@ -6,10 +6,7 @@ import com.cpallas.entities.Permission;
 import com.cpallas.entities.Role;
 import com.cpallas.entities.Status;
 import com.cpallas.entities.User;
-import lombok.Cleanup;
 import lombok.experimental.UtilityClass;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -21,8 +18,8 @@ import static com.cpallas.entities.RoleValue.USER;
 public class TestDataImporter {
 
     public void importData(EntityManager entityManager) {
-        Role admin = saveRole(entityManager, ADMIN.getStatus());
-        Role user = saveRole(entityManager, USER.getStatus());
+        Role admin = saveRole(entityManager, ADMIN.getRole());
+        Role user = saveRole(entityManager, USER.getRole());
 
         User alex = saveUser(entityManager, "Alex", "Sizov");
         User anay = saveUser(entityManager, "Anay", "Chan");

@@ -2,18 +2,22 @@ package com.cpallas.entities.dao;
 
 import com.cpallas.dao.RoleRepository;
 import com.cpallas.entities.Role;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RequiredArgsConstructor
 public class RoleRepositoryIT extends BaseIntegrationTest {
 
     private final RoleRepository roleRepository;
+
+    @Autowired
+    public RoleRepositoryIT(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Test
     void findAll() {

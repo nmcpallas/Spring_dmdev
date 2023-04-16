@@ -1,14 +1,8 @@
 package com.cpallas.dao;
 
 import com.cpallas.entities.Role;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
-import javax.persistence.EntityManager;
-
-@Repository
-public class RoleRepository extends AbstractRepositoryBase<Integer, Role> {
-
-    public RoleRepository(EntityManager entityManager) {
-        super(Role.class, entityManager);
-    }
+public interface RoleRepository extends JpaRepository<Role, Integer>, QuerydslPredicateExecutor<Role> {
 }
