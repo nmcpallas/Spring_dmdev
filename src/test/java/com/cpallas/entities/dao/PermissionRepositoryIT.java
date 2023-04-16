@@ -1,6 +1,6 @@
 package com.cpallas.entities.dao;
 
-import com.cpallas.dao.PermissionRepository;
+import com.cpallas.repository.PermissionRepository;
 import com.cpallas.entities.Permission;
 import com.cpallas.entities.RoleValue;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.cpallas.dao;
+package com.cpallas.repository;
 
 import com.cpallas.entities.BankAccount;
 import org.springframework.data.domain.Pageable;

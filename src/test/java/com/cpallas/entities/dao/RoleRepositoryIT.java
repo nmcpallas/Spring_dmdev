@@ -1,6 +1,6 @@
 package com.cpallas.entities.dao;
 
-import com.cpallas.dao.RoleRepository;
+import com.cpallas.repository.RoleRepository;
 import com.cpallas.entities.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

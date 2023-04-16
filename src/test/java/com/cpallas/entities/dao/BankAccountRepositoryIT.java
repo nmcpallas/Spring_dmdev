@@ -1,9 +1,9 @@
 package com.cpallas.entities.dao;
 
-import com.cpallas.dao.BankAccountRepository;
+import com.cpallas.repository.BankAccountRepository;
 import com.cpallas.entities.BankAccount;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
@@ -11,14 +11,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RequiredArgsConstructor
 public class BankAccountRepositoryIT extends BaseIntegrationTest {
 
     private final BankAccountRepository bankAccountRepository;
-
-    @Autowired
-    public BankAccountRepositoryIT(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
-    }
 
     @Test
     void findAll() {

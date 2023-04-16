@@ -1,4 +1,7 @@
 spring:
+  mvc:
+    format:
+      date: iso
   datasource:
     username: postgres
     password: postgres
@@ -9,3 +12,4 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+    open-in-view: false

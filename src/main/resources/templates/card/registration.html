@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Registration</title>
+    </head>
+    <body>
+        <form th:action="@{/cards}" method="post" th:object="${card}">
+            <label for="creditCardNumber">creditCardNumber:
+                <input id="creditCardNumber" type="text" name="creditCardNumber" th:value="*{creditCardNumber}">
+            </label><br>
+            <label for="pin">pin:
+                <input id="pin" type="text" name="pin" th:value="*{pin}">
+            </label><br>
+            <label for="ccv">Lastname:
+                <input id="ccv" type="text" name="ccv" th:value="*{ccv}">
+            </label><br>
+            <label for="creditBalance">creditBalance:
+                <input id="creditBalance" type="text" name="creditBalance" th:value="*{creditBalance}">
+            </label><br>
+            <label for="amountBalance">amountBalance
+                <input id="amountBalance" type="text" name="amountBalance" th:value="*{amountBalance}">
+            </label><br>
+            <label for="currentBalance">currentBalance:
+                <input id="currentBalance" type="text" name="currentBalance" th:value="*{currentBalance}">
+            </label><br>
+            <label for="minimumPayment">minimumPayment:
+                <input id="minimumPayment" type="text" name="minimumPayment" th:value="*{minimumPayment}">
+            </label><br>
+            <label for="monthlyPayment">monthlyPayment:
+                <input id="monthlyPayment" type="text" name="monthlyPayment" th:value="*{monthlyPayment}">
+            </label><br>
+            <label for="startDate">startDate:
+                <input id="startDate" type="date" name="startDate" th:value="*{startDate}">
+            </label><br>
+            <label for="endDate">endDate:
+                <input id="endDate" type="date" name="endDate" th:value="*{endDate}">
+            </label><br>
+            <label for="status">status:
+                <input id="status" type="text" name="status" th:value="*{status}">
+            </label><br>
+            <label for="bankAccountId">bankAccountId:
+                <input id="bankAccountId" type="text" name="bankAccountId" th:value="*{bankAccountId}">
+            </label><br>
+            <button type="submit">Register</button>
+        </form>
+    </body>
+</html>

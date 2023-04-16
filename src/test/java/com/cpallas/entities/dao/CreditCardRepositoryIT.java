@@ -1,6 +1,6 @@
 package com.cpallas.entities.dao;
 
-import com.cpallas.dao.CreditCardRepository;
+import com.cpallas.repository.CreditCardRepository;
 import com.cpallas.entities.CreditCard;
 import com.cpallas.entities.Status;
 import org.junit.jupiter.api.Test;

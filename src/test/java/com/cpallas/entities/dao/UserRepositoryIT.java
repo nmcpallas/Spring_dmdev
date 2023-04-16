@@ -1,8 +1,7 @@
 package com.cpallas.entities.dao;
 
-import com.cpallas.dao.UserRepository;
+import com.cpallas.repository.UserRepository;
 import com.cpallas.entities.User;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
